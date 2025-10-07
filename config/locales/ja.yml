@@ -1,5 +1,12 @@
 ---
 ja:
+  memo:
+    title: "私のメモ帳"
+    show: "このメモを表示"
+    edit: "このメモを編集"
+    destroy: "このメモを削除"
+    new: "新しいメモ"
+    back: "メモ一覧に戻る"
   activerecord:
     errors:
       messages:

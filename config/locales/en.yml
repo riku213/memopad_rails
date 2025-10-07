@@ -28,6 +28,13 @@
 #       enabled: "ON"
 
 en:
+  memo:
+    title: "My Memopad"
+    show: "Show this memo"
+    edit: "Edit this memo"
+    destroy: "Delete this memo"
+    new: "New memo"
+    back: "Back to memos list"
   activerecord:
     errors:
       messages:
