@@ -28,9 +28,6 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
----
-en-US:
   activerecord:
     errors:
       messages:
