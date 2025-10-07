@@ -2,15 +2,15 @@
 
 <% content_for :title, "Memos" %>
 
-<h1>Memos</h1>
+<h1><%= t("memo.title") %></h1>
 
 <div id="memos">
   <% @memos.each do |memo| %>
     <%= render memo %>
     <p>
-      <%= link_to "Show this memo", memo %>
+      <%= link_to t("memo.show"), memo %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New memo", new_memo_path %>
+<%= link_to t("memo.new"), new_memo_path %>
