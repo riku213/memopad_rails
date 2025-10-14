@@ -8,3 +8,39 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+  div#container {
+    background-color: white;
+    margin: 0 auto;
+    padding: 5px 0 0;
+    width: 800px;
+  }
+  
+  div#header {
+    background-color: cyan;
+    padding-top: 4px;
+    border-top: 4px solid #6bb;
+  }
+  .horizontal{
+    display: flex;
+  }
+  div#left {
+    width: 500px;
+    background-color: white;
+    padding: 6px 6px 6px 0;
+  }
+
+  div#right {
+    width: 228px;
+    background-color: #e8ffff;
+  }
+  
+  div#footer {
+    background-color: white;
+    border-top: 2px lightgreen solid ;
+    text-align: center;
+    width: 100%;
+  }
+  
+  div#menu_bar{
+    color: black;
+  }
