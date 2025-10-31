@@ -1,5 +1,6 @@
 class MemosController < ApplicationController
   before_action :set_memo, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /memos or /memos.json
   def index
@@ -64,7 +65,7 @@ class MemosController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def memo_params
+    def memo_paramsx
       params.expect(memo: [ :content ])
     end
 end

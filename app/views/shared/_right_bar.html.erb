@@ -1,2 +1,11 @@
+Login / Logout <br />
+<% if current_user %>
+  <div align=“right”>
+    Hello, <%= current_user.email %><br />
+   <%= link_to('Sign out', destroy_user_session_path, :method => :delete,
+                    data: { turbo_method: :delete}) %>
+  </div> 
+<% end %>
+<br />
 For Rent.<br />
-AD Space
+AD Space<br />

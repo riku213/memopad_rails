@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  get 'memos', :to => 'memos#index', :as => :user_root
   resources :memos
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
