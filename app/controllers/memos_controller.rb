@@ -5,6 +5,13 @@ class MemosController < ApplicationController
   # GET /memos or /memos.json
   def index
     @memos = Memo.all
+    
+    if current_user and current_user.handle_name.blank?
+      session[:back_to_home] = true
+      redirect_to edit_user_path(current_user.id)
+    else
+      @memos = Memo.all
+    end
   end
 
   # GET /memos/1 or /memos/1.json
