@@ -63,3 +63,14 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+group :test, :development do
+  gem "rspec-rails"
+  gem "rails-controller-testing”
+  gem "factory_bot_rails”
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem "database_cleaner”
+  gem 'webdrivers’
+end
+

@@ -16,6 +16,12 @@
     <%= form.textarea :content %>
   </div>
 
+  <div class="field">
+    <%= form.label :category %><br />
+    <%= form.select :category_id, Category.all.collect{|c|[c.name,c.id]} %>
+  </div>
+
+
   <div>
     <%= form.submit %>
   </div>
