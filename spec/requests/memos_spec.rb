@@ -17,7 +17,7 @@ RSpec.describe "Memos", type: :request do
   describe "GET /index" do
     it "Successfully signed in, displays memos list page." do
       @user = FactoryBot.create(:user1)
-      sign_in @user
+      sign_in @user, scope: :user
       get memos_path
       expect(response).to have_http_status(200)
     end
@@ -31,7 +31,7 @@ RSpec.describe "Memos", type: :request do
   describe "PATCH /update" do
     before do
       @user = FactoryBot.create(:user1)
-      sign_in @user
+      sign_in @user, scope: :user
     end
 
     context "when category_id is not null," do

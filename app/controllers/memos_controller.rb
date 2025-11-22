@@ -72,7 +72,7 @@ class MemosController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def memo_paramsx
+    def memo_params
       params.expect(memo: [ :content, :category_id ])
     end
 end
