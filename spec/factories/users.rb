@@ -14,3 +14,4 @@ FactoryBot.define do
       # 別のユーザー用
     end
   end
+end
