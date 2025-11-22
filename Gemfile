@@ -74,3 +74,5 @@ group :test, :development do
   gem 'webdrivers'
 end
 
+gem 'bootstrap'
+gem 'dartsass-rails'

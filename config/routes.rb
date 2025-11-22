@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # get "help/index"
+  get 'help', to: 'help#index'
   resources :categories
   devise_for :users
   resources :users

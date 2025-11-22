@@ -14,3 +14,39 @@
 </div>
 
 <%= link_to t("memo.new"), new_memo_path %>
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Memos" %>
+
+<h1><%= t("memo.title") %></h1>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @memos.each do |memo| %>
+      <tr>
+        <td><%= memo.content %></td>
+        <td><%= memo.category.name if memo.category %></td>
+        
+        <td><%= link_to t("memo.show"), memo, class: "btn btn-sm btn-outline-primary" %></td>
+        <td><%= link_to t("memo.edit"), edit_memo_path(memo), class: "btn btn-sm btn-outline-success" %></td>
+        <td>
+          <%= link_to t("memo.destroy"), memo, 
+              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, 
+              class: "btn btn-sm btn-outline-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t("memo.new"), new_memo_path, class: "btn btn-primary" %>
