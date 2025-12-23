@@ -30,5 +30,10 @@ module Memopad
         integration_tool: false
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
+    # config/application.rb
+    config.after_initialize do
+      Seat.seat_init
+    end
+
   end
 end

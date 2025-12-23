@@ -10,3 +10,5 @@ pin "@popperjs/core", to: "popper.js", preload: true
 pin "jquery" # @3.7.1
 pin "help", to: "help.js"
 pin "help_win", to: "help_win.js"
+pin "@rails/actioncable", to: "actioncable.esm.js"
+pin_all_from "app/javascript/channels", under: "channels"

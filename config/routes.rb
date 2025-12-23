@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "reserve/index"
   # get "help/index"
   get 'help', to: 'help#index'
   resources :categories
@@ -19,4 +20,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root to: "memos#index"
+  get 'reserve', to: 'reserve#index'
 end
