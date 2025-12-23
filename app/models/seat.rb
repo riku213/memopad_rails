@@ -14,6 +14,18 @@ class Seat < ApplicationRecord
     true
   end
 
+def self.unbook_seat(row, position)
+    seat = Seat.find_by(row: row, position: position)
+    return false if seat.nil?
+
+    seat.with_lock do
+      return false if seat.condition == 0
+      seat.update!(condition: 0)
+    end
+
+    true
+  end
+
   # 初期座席生成
   def self.seat_init
     (1..15).each do |row|

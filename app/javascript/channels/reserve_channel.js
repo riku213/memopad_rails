@@ -8,24 +8,32 @@ const reserveChannel = consumer.subscriptions.create("ReserveChannel", {
   received(data) {    
     console.log("received", data)
     // Called when there's incoming data on the websocket for this channel    
-    // convert "1A" to (0, 0) , "3D" --> (2, 3)    
     var row_value = data['row'] - 1;    
     var pos_value = data['position'].charCodeAt(0) - seat_A_code;
-    book_seat(row_value, pos_value);  
+
+    // reserved フラグが明示されている場合はそれに従う。無ければ予約扱い。
+    if (data['reserved'] === 0 || data['reserved'] === false || data['status'] === 'unreserved') {
+      unbook_seat(row_value, pos_value);
+    } else {
+      book_seat(row_value, pos_value);
+    }
   },
   reserve_seat: function(row, position) {    
-    return this.perform('reserve_seat',        
-      {row: row, position: position});  
-    }
-  });
-var cell_offset = 15;
-var cell_size = 20;
-var cell_padding = 10;
+    return this.perform('reserve_seat', {row: row, position: position});  
+  },
+  // 追加: 解除用
+  unreserve_seat: function(row, position) {
+    return this.perform('unreserve_seat', {row: row, position: position});
+  }
+});
+var cell_offset = 0;
+var cell_size = 10;
+var cell_padding = 0;
 
 var seat_A_code = 'A'.charCodeAt(0);
 
-var max_row = 15;
-var max_position = 4;
+var max_row = 30;
+var max_position = 10;
 var reserved = [];
 // Get Canvas coordinate of X
 function get_x(row){  
@@ -42,6 +50,13 @@ function get_seat_name(row, position){
 // Change the reserved condition, and redraw the seat
 function book_seat(row, position){
   reserved[row][position] = 1;
+  var canvas = $("#canvas").get(0);
+  var context = canvas.getContext("2d");
+  draw_seat(context, row, position);
+}
+
+function unbook_seat(row, position){
+  reserved[row][position] = 0;
   var canvas = $("#canvas").get(0);
   var context = canvas.getContext("2d");
   draw_seat(context, row, position);
@@ -116,14 +131,17 @@ function onClick(event){
   var ypos = get_y(position);
   if (x >= xpos && x < xpos + cell_size){
     if (y >= ypos && y < ypos + cell_size){
-      // Clicked inside the cell:
       console.log("seat hit", row, position)
+      var seat_name = get_seat_name(row, position);
+
       if (reserved[row][position] == 1){
-        alert("The seat is already reserved.");
-      }
-      else{
-        var seat_name = get_seat_name(row, position)
-        // alert("Reserve " + seat_name[0] + seat_name[1] + "!");
+        // 赤→緑（予約解除）
+        unbook_seat(row, position);
+        // サーバにも通知（サーバ側に unreserve_seat を実装してください）
+        reserveChannel.unreserve_seat(seat_name[0], seat_name[1]);
+      } else {
+        // 緑→赤（予約）
+        book_seat(row, position);
         reserveChannel.reserve_seat(seat_name[0], seat_name[1]);
       }
     }
